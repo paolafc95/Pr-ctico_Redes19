@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import ServerModel.ServerModel;
@@ -16,9 +17,9 @@ import ServerModel.ServerModel;
 public class ServerWebClientAccept extends Thread{
 	
 	private Socket socket;
-	private ServerModel server;
+	private WebServer server;
 	
-	public ServerWebClientAccept(Socket socket, ServerModel server) {
+	public ServerWebClientAccept(Socket socket, WebServer server) {
 		
 		this.socket = socket;
 		this.server = server;
@@ -50,7 +51,7 @@ public class ServerWebClientAccept extends Thread{
 				{
 					StringBuilder responseBuffer =  new StringBuilder();
 					String str="";
-					BufferedReader buf = new BufferedReader(new FileReader("./html/Contactanos.html"));			
+					BufferedReader buf = new BufferedReader(new FileReader("./html/login.html"));			
 					while ((str = buf.readLine()) != null) {
 						responseBuffer.append(str);
 				    }
@@ -62,28 +63,33 @@ public class ServerWebClientAccept extends Thread{
 				{
 					System.out.println("Get method processed");
 					String[] response =  httpQueryString.split("=");
-					String mensajeObtenido = "listo ya esta :v";
-					String[] lista = mensajeObtenido.split("\n");
+					
+					ArrayList<String> list=server.mensajeSalida(response[1].split("&")[0],response[2]);
+					Object[] lista = list.toArray();
+					//String mensajeObtenido = ;
+					//String[] lista = mensajeObtenido.split("\n");
+					
 					StringBuilder responseBuffer =  new StringBuilder();
 					responseBuffer
 					.append("<html>")
 					.append("<head>")
 					.append("<style>")
 					.append("body{")
-					.append("	background-image: url(\"https://drive.google.com/file/d/1xZfWxNobQfVBSg9o5VXQASWIWyIeXaGY/view\");")
+					.append("	background-image: url(\"http://agar.io/img/1200x630.png\");")
 					.append("}")
 					.append("</style>")
-					.append("<title>Informacion Cedula Correspondiente</title>")
+					.append("<title>Records del jugador</title>")
 					.append("</head>")
 					.append("<body>")
 					.append("<h1>Listado de Carreras Realizadas</h1>")
 					.append("<table>")
 					.append("<tr>")
-					.append("<td><strong>CEDULA</strong></td>")
-					.append("<td><strong>CABALLO</strong></td>")
-					.append("<td><strong>MONTO $</strong></td>")
-					.append("<td><strong>GANO?</strong></td>")
-					.append("<td><strong>"+mensajeObtenido+"</td>");;
+					.append("<td><strong>USERNAME</strong></td>")
+					.append("<td><strong>PUNTAJE</strong></td>")
+					.append("<td><strong>FECHA</strong></td>")
+					.append("<td><strong>PARTIDA</strong></td>")
+					.append("<td><strong>JUGADORES ADVERSARIOS</strong></td>");
+					agregarlista(lista,responseBuffer, response[1].trim());
 					responseBuffer.append("<body>")
 					.append("<table>")
 					.append("<body>")
@@ -106,6 +112,19 @@ public class ServerWebClientAccept extends Thread{
 		}	
 		
 	}
+	private void agregarlista(Object[] lista , StringBuilder responseBuffer, String usr) {
+		for (int i = 0; i < lista.length; i++) {
+			System.out.println("CHEQUEO LISTA :" + lista[i]);			
+			responseBuffer.append("<tr>");
+			responseBuffer.append("<td>"+((String) lista[i]).split(";")[0]+"</td>");
+			responseBuffer.append("<td>"+((String) lista[i]).split(";")[1]+"</td>");
+			responseBuffer.append("<td>"+((String) lista[i]).split(";")[2]+"</td>");
+			responseBuffer.append("<td>"+((String) lista[i]).split(";")[3]+"</td>");
+			responseBuffer.append("<td>"+((String) lista[i]).split(";")[4]+"</td>");
+			responseBuffer.append("<tr>");			
+		}		
+	}
+	
 	public void sendResponse(Socket socket, int statusCode, String responseString)
 	{
 		String statusLine;

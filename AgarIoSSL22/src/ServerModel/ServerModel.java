@@ -20,6 +20,7 @@ import chat.ServerChat;
 
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -58,6 +59,8 @@ public class ServerModel extends JFrame {
 	public static final int TIMEGAME=5;
 	public static final int TIMEWAIT=2;
 	public static final int PORT_WEB_SERVICE = 7000;
+	public static final String LOCAL_HOST = "localhost";
+	public static final int PORT_BD = 6500;
 	private static Vector users=new Vector<>();; 
 	
 	private boolean gameStart,timeLimit,startTime;
@@ -91,14 +94,15 @@ public class ServerModel extends JFrame {
 	private ArrayList<Player> jugadores;
 	
 	private GestorPlayer gp;
-	private ServerSocket ServerSocketWebService;
-	
+	private ServerSocket ServerSocketWebService;	
 	private HiloDespliegueAppWeb appWeb;
+	
 	private GestorVirus gc;
 	private Collision collision;
 	private Infecting infecting;
 	private boolean inThread;
 	public boolean webService;
+	
 	public ArrayList<String> getPosPlayers() {
 		return posPlayers;
 	}
@@ -106,9 +110,7 @@ public class ServerModel extends JFrame {
 	public void setPosPlayers(ArrayList<String> posPlayers) {
 		this.posPlayers = posPlayers;
 	}
-
-	/**
-	 * 
+	/** 
 	 * Create the frame.
 	 */
 	public ServerModel(ServerSocket mysocket,ServerSocket mysocket2) {
@@ -126,7 +128,7 @@ public class ServerModel extends JFrame {
 		}
 		
 		webService=true;
-		appWeb=new HiloDespliegueAppWeb(this);
+		//appWeb=new HiloDespliegueAppWeb(this);
 		appWeb.start();
 		
 		posPlayers=new ArrayList<>();
@@ -404,6 +406,5 @@ public class ServerModel extends JFrame {
 	public void setServerSocketWebService(ServerSocket serverSocketWebService) {
 		ServerSocketWebService = serverSocketWebService;
 	}
-
-
+	
 }
