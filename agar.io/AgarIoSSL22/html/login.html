@@ -6,14 +6,14 @@
 <style>
 form{
 	width: 25%;
-	border: 5px solid black;
+	border: 3px solid black;
 	margin: 30px;
 	padding: 20px;
 	margin: auto;
 	display: block;	
 }
 label{
-	font-size: 25px;
+	font-size: 20px;
 	display: block;
 	width: 100%;
 	color: black;	
@@ -30,7 +30,18 @@ input:focus{
 
 body {	
 	background: url("http://agar.io/img/1200x630.png");
+	margin: 0;
+	background-size: cover;
+	background-attachment: fixed;
 
+}
+p{
+	padding: 2px;
+	font-size: 15px;
+	font-family: Verdana;
+}
+label{
+	font-family: Verdana;
 }
 </style>
 <body>
@@ -44,7 +55,7 @@ body {
 			<label for ="Password">Password</label>
 			<input type="password" id="password" name= pass placeholder="Escribe tu contraseña">
 
-			<input type="submit" value="send">
+			<input type="submit" value="Sign in">
 
 		</form>
 	</div>

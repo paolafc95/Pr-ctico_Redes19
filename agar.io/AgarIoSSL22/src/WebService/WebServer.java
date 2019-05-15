@@ -42,15 +42,6 @@ public WebServer() throws InterruptedException, IOException {
 
 }
 	
-
-public void agregarjugadoresPersistir(String mensaje) {
-		
-		//System.out.println("username : " + mensaje.split(",")[0] + " puntaje : " +  mensaje.split(",")[1] + "" + mensaje.split(",")[2] ) ;
-		String guardar = mensaje.split(",")[0] + "," + mensaje.split(",")[1] + "," + mensaje.split(",")[2] + "," + mensaje.split(",")[3]+ mensaje.split(",")[4]+ mensaje.split(",")[5] + "NO";
-		jugadoresPersistir.add(guardar);		
-		
-	}
-
 	public ArrayList<String> getjugadoresPersistir() {
 		return jugadoresPersistir;
 	}

@@ -59,7 +59,7 @@ public class ServerWebClientAccept extends Thread{
 				    buf.close();
 				}
 				//permite obtener el dato ingresado en el submit
-				if(httpQueryString.contains("/?ced="))
+				if(httpQueryString.contains("/?usr="))
 				{
 					System.out.println("Get method processed");
 					String[] response =  httpQueryString.split("=");
@@ -75,20 +75,62 @@ public class ServerWebClientAccept extends Thread{
 					.append("<head>")
 					.append("<style>")
 					.append("body{")
-					.append("	background-image: url(\"http://agar.io/img/1200x630.png\");")
+					.append("background-image: url(\"http://agar.io/img/1200x630.png\");")
+					.append("margin: 0;")
+					.append("background-size: cover;")
+					.append("margin: 0;")
+					.append("background-attachment: fixed;")
+					.append("font-family: Verdana;")
 					.append("}")
-					.append("</style>")
-					.append("<title>Records del jugador</title>")
+					
+					.append("h1{")
+					.append("text-align: center;")
+					.append("}")
+					
+					.append("table{")
+					.append("border: 1px solid #000;")
+					.append("border-collapse: collapse;")
+					.append("margin: auto;")
+					.append("width: 100%;")
+					.append("}")
+					
+					.append("table th{")
+					.append("border: 1px solid #000;")
+					.append("border-collapse: collapse;")
+					.append("padding: 5px;")
+					.append("background-color: #55B8DE;")
+					.append("text-align: center;")
+					.append("}")
+					
+					.append("table td{")
+					.append("border: 1px solid #000;")
+					.append("padding: 15px;")
+					.append("background-color: #AF8CF0;")
+					.append("text-align: center;")
+					.append("}")
+					
+					.append("table tr:hover{")
+					.append("background: #D6D6D6;")
+					.append("}")
+					
+					.append("table td:hover{")
+					.append("background: #FBABF4;")
+					.append("color:white;")
+					.append("	}")					
+					.append("</style>")					
+					.append("<title>Record del jugador</title>")
 					.append("</head>")
+					
 					.append("<body>")
-					.append("<h1>Listado de Carreras Realizadas</h1>")
+					.append("<h1>Listado  de records</h1>")
+					
 					.append("<table>")
 					.append("<tr>")
-					.append("<td><strong>USERNAME</strong></td>")
-					.append("<td><strong>PUNTAJE</strong></td>")
-					.append("<td><strong>FECHA</strong></td>")
-					.append("<td><strong>PARTIDA</strong></td>")
-					.append("<td><strong>JUGADORES ADVERSARIOS</strong></td>");
+					.append("<th><strong>USERNAME</strong></th>")
+					.append("<th><strong>PUNTAJE</strong></th>")
+					.append("<th><strong>FECHA</strong></th>")
+					.append("<th><strong>PARTIDA</strong></th>")
+					.append("<th><strong>JUGADORES ADVERSARIOS</strong></th>");
 					agregarlista(lista,responseBuffer, response[1].trim());
 					responseBuffer.append("<body>")
 					.append("<table>")
